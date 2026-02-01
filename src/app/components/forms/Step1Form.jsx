@@ -1,10 +1,14 @@
 export default function Step1Form() {
   return (
     <div className="bg-white rounded-lg p-6 shadow-md md:shadow-none">
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Personal info</h1>
-      <h2 className="text-gray-500 mb-6">
-        Please provide your name, email address, and phone number.
-      </h2>
+      <header className="mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#02295a] mb-2">
+          Personal Info
+        </h1>
+        <p className="text-gray-400 ">
+          Please provide your name, email address, and phone number.
+        </p>
+      </header>
 
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
