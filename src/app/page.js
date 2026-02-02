@@ -4,6 +4,8 @@ import Step1Form from "./components/forms/Step1Form";
 import Button from "./components/Button";
 import Step2Form from "./components/forms/Step2Form";
 import Step3Form from "./components/forms/Step3Form";
+import Step4Form from "./components/forms/Step4Form";
+import ThankYouCard from "./components/forms/ThankYouCard";
 
 export default function Home() {
   return (
@@ -12,7 +14,7 @@ export default function Home() {
       <div className="md:hidden">
         <StepIndicator />
         <div className="relative px-4 -mt-16 pb-8 z-20">
-          <Step3Form />
+          <ThankYouCard />
         </div>
         <Button />
       </div>
@@ -22,7 +24,7 @@ export default function Home() {
         <div className="flex gap-8 bg-white rounded-2xl p-4">
           <StepIndicator />
           <div className="flex flex-col justify-between">
-            <Step3Form />
+            <ThankYouCard />
             <Button />
           </div>
         </div>
