@@ -1,6 +1,6 @@
 import Img from "next/image";
 
-export default function StepIndicator() {
+export default function StepIndicator({ currentStep }) {
   return (
     <div className="relative w-full h-43.5 md:h-screen md:w-68.5">
       {/* Mobile */}
@@ -23,7 +23,16 @@ export default function StepIndicator() {
                md:flex-col md:w-auto md:left-12 md:top-16 md:gap-6"
       >
         <li className="flex items-center gap-4">
-          <div className="border border-white px-3 py-1 text-white rounded-full">
+          <div
+            className={`
+  flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-300
+  ${
+    currentStep === 1
+      ? "bg-[#bee2fd] border-[#bee2fd] text-[#02295a]" // Active Style
+      : "border-white text-white" // Inactive Style
+  }
+`}
+          >
             1
           </div>
           <div className="hidden md:block">
@@ -35,7 +44,16 @@ export default function StepIndicator() {
         </li>
 
         <li className="flex items-center gap-4">
-          <div className="border border-white px-3 py-1 text-white rounded-full">
+          <div
+            className={`
+  flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-300
+  ${
+    currentStep === 2
+      ? "bg-[#bee2fd] border-[#bee2fd] text-[#02295a]" // Active Style
+      : "border-white text-white" // Inactive Style
+  }
+`}
+          >
             2
           </div>
           <div className="hidden md:block">
@@ -47,7 +65,16 @@ export default function StepIndicator() {
         </li>
 
         <li className="flex items-center gap-4">
-          <div className="border border-white px-3 py-1 text-white rounded-full">
+          <div
+            className={`
+  flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-300
+  ${
+    currentStep === 3
+      ? "bg-[#bee2fd] border-[#bee2fd] text-[#02295a]" // Active Style
+      : "border-white text-white" // Inactive Style
+  }
+`}
+          >
             3
           </div>
           <div className="hidden md:block">
@@ -57,7 +84,16 @@ export default function StepIndicator() {
         </li>
 
         <li className="flex items-center gap-4">
-          <div className="border border-white px-3 py-1 text-white rounded-full">
+          <div
+            className={`
+  flex items-center justify-center w-8 h-8 rounded-full border transition-colors duration-300
+  ${
+    currentStep === 4
+      ? "bg-[#bee2fd] border-[#bee2fd] text-[#02295a]" // Active Style
+      : "border-white text-white" // Inactive Style
+  }
+`}
+          >
             4
           </div>
           <div className="hidden md:block">
