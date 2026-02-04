@@ -1,6 +1,26 @@
 import Image from "next/image";
-
+import { z } from "zod";
+import { useState } from "react";
 export default function Step2Form() {
+  const [isYearly, setIsYearly] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("Arcade");
+  const [addOns, setAddOns] = useState({
+    onlineService: false,
+    largerStorage: false,
+    customizableProfile: false,
+  });
+
+  const toggleBilling = () => {
+    setIsYearly((prev) => !prev);
+  };
+
+  const step2Schema = z.object({
+    plan: z.enum(["Arcade", "Advanced", "Pro"], {
+      errorMap: () => ({ message: "Please select a plan" }),
+    }),
+    billing: z.enum(["monthly", "yearly"]),
+  });
+
   return (
     <div className="bg-white rounded-lg p-6 shadow-md md:shadow-none md:px-12">
       <header className="mb-6">
@@ -14,7 +34,14 @@ export default function Step2Form() {
 
       <div className="flex flex-col md:flex-row gap-4 w-full mb-8">
         {/* Arcade Plan Card */}
-        <div className="flex md:flex-col items-start md:justify-between border border-[#483eff] bg-[#f8f9ff] w-full rounded-lg p-4 cursor-pointer hover:border-[#483eff] transition-all">
+        <div
+          onClick={() => setSelectedPlan("Arcade")}
+          className={`flex md:flex-col items-start md:justify-between border w-full rounded-lg p-4 cursor-pointer transition-all ${
+            selectedPlan === "Arcade"
+              ? "border-[#483eff] bg-[#f8f9ff]"
+              : "border-[#cbcbcd] bg-white hover:border-[#483eff]"
+          }`}
+        >
           <div className="mr-4 md:mr-0 md:mb-10">
             <Image
               src="/icon-arcade.svg"
@@ -26,15 +53,26 @@ export default function Step2Form() {
 
           <div>
             <p className="font-bold text-[#02295a]">Arcade</p>
-            <p className="text-gray-400 text-sm">$9/mo</p>
-            <small className="text-[11px] text-[#02295a] block mt-1">
-              2 months free
-            </small>
+            <p className="text-gray-400 text-sm">
+              {isYearly ? "$90/year" : "$9/month"}
+            </p>
+            {isYearly && (
+              <small className="text-[11px] text-[#02295a] block mt-1">
+                2 months free
+              </small>
+            )}
           </div>
         </div>
 
         {/* Advanced */}
-        <div className="flex md:flex-col items-start md:justify-between border border-[#483eff] bg-[#f8f9ff] w-full rounded-lg p-4 cursor-pointer hover:border-[#483eff] transition-all">
+        <div
+          onClick={() => setSelectedPlan("Advanced")}
+          className={`flex md:flex-col items-start md:justify-between border w-full rounded-lg p-4 cursor-pointer transition-all ${
+            selectedPlan === "Advanced"
+              ? "border-[#483eff] bg-[#f8f9ff]"
+              : "border-[#cbcbcd] bg-white hover:border-[#483eff]"
+          }`}
+        >
           <div className="mr-4 md:mr-0 md:mb-10">
             <Image
               src="/icon-advanced.svg"
@@ -46,25 +84,40 @@ export default function Step2Form() {
 
           <div>
             <p className="font-bold text-[#02295a]">Advanced</p>
-            <p className="text-gray-400 text-sm">$12/mo</p>
-            <small className="text-[11px] text-[#02295a] block mt-1">
-              2 months free
-            </small>
+            <p className="text-gray-400 text-sm">
+              {isYearly ? "$120/year" : "$12/month"}
+            </p>
+            {isYearly && (
+              <small className="text-[11px] text-[#02295a] block mt-1">
+                2 months free
+              </small>
+            )}
           </div>
         </div>
 
         {/* Pro */}
-        <div className="flex md:flex-col items-start md:justify-between border border-[#483eff] bg-[#f8f9ff] w-full rounded-lg p-4 cursor-pointer hover:border-[#483eff] transition-all">
+        <div
+          onClick={() => setSelectedPlan("Pro")}
+          className={`flex md:flex-col items-start md:justify-between border w-full rounded-lg p-4 cursor-pointer transition-all ${
+            selectedPlan === "Pro"
+              ? "border-[#483eff] bg-[#f8f9ff]"
+              : "border-[#cbcbcd] bg-white hover:border-[#483eff]"
+          }`}
+        >
           <div className="mr-4 md:mr-0 md:mb-10">
             <Image src="/icon-pro.svg" alt="Pro Icon" width={40} height={40} />
           </div>
 
           <div>
             <p className="font-bold text-[#02295a]">Pro</p>
-            <p className="text-gray-400 text-sm">$15/mo</p>
-            <small className="text-[11px] text-[#02295a] block mt-1">
-              2 months free
-            </small>
+            <p className="text-gray-400 text-sm">
+              {isYearly ? "$150/year" : "$15/month"}
+            </p>
+            {isYearly && (
+              <small className="text-[11px] text-[#02295a] block mt-1">
+                2 months free
+              </small>
+            )}
           </div>
         </div>
       </div>
@@ -72,9 +125,16 @@ export default function Step2Form() {
       {/* Toggle Section */}
       <div className="w-full bg-[#f8f9ff] rounded-lg p-3 flex justify-center items-center gap-6 mt-8">
         <span className="text-sm font-bold text-[#02295a]">Monthly</span>
-        <div className="w-10 h-5 bg-[#02295a] rounded-full relative p-1 flex items-center">
-          <div className="w-3 h-3 bg-white rounded-full"></div>
-        </div>
+        <button
+          onClick={toggleBilling}
+          className="w-10 h-5 bg-[#02295a] rounded-full relative p-1 flex items-center cursor-pointer"
+        >
+          <div
+            className={`w-3 h-3 bg-white rounded-full transition-transform duration-300 ${
+              isYearly ? "translate-x-5" : "translate-x-0"
+            }`}
+          ></div>
+        </button>
         <span className="text-sm font-bold text-gray-400">Yearly</span>
       </div>
     </div>

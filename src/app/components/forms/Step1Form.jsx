@@ -10,11 +10,8 @@ export default function Step1Form({
   const schema = z.object({
     name: z.string().min(1, "This field is required"),
     email: z.string().email("This field is required"),
-    phone: z
-      .string()
-      .min(1, "This field is required")
-      .min(10, "Phone must be at least 10 digits")
-      .regex(/^\+?[0-9\s\-]+$/, "Invalid phone format"),
+    phone: z.string().min(10, "This field is required"),
+    // .regex(/^\+?[0-9\s\-]+$/, "Invalid phone format"),
   });
   const {
     register,
@@ -41,59 +38,70 @@ export default function Step1Form({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-sm font-medium text-gray-700">
-              Name
-            </label>
+            <div className="flex justify-between">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-gray-700"
+              >
+                Name
+              </label>
+              {errors.name && (
+                <p className="text-red-500 font-medium text-sm mt-1">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
             <input
               id="name"
               type="text"
               placeholder="e.g. Stephen King"
               {...register("name")}
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`border ${errors.name ? "border-red-500" : "border-gray-300"} rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />{" "}
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-            )}
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="email"
-              className="text-sm font-medium text-gray-700"
-            >
-              Email Address
-            </label>
+            <div className="flex justify-between">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
+                Email Address
+              </label>
+              {errors.email && (
+                <p className="text-red-500 font-medium text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
             <input
               id="email"
               type="email"
               placeholder="e.g. stephenking@lorem.com"
               {...register("email")}
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`border ${errors.email ? "border-red-500" : "border-gray-300"} rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />{" "}
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="phone"
-              className="text-sm font-medium text-gray-700"
-            >
-              Phone Number
-            </label>
+            <div className="flex justify-between">
+              <label
+                htmlFor="phone"
+                className="text-sm font-medium text-gray-700"
+              >
+                Phone Number
+              </label>
+              {errors.phone && (
+                <p className="text-red-500 font-medium text-sm mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
+            </div>
             <input
               id="phone"
               type="tel"
               {...register("phone")}
               placeholder="e.g. +1 234 567 890"
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`border ${errors.phone ? "border-red-500" : "border-gray-300"} rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />{" "}
-            {errors.phone && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.phone.message}
-              </p>
-            )}
           </div>
         </div>
         <div
