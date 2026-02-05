@@ -1,19 +1,15 @@
 import Image from "next/image";
 import { z } from "zod";
 import { useState } from "react";
-export default function Step2Form() {
-  const [isYearly, setIsYearly] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState("Arcade");
-  const [addOns, setAddOns] = useState({
-    onlineService: false,
-    largerStorage: false,
-    customizableProfile: false,
-  });
-
-  const toggleBilling = () => {
-    setIsYearly((prev) => !prev);
-  };
-
+export default function Step2Form({
+  currentStep,
+  handlePrevStep,
+  saveFormData,
+  isYearly,
+  toggleBilling,
+  selectedPlan,
+  setSelectedPlan,
+}) {
   const step2Schema = z.object({
     plan: z.enum(["Arcade", "Advanced", "Pro"], {
       errorMap: () => ({ message: "Please select a plan" }),
@@ -136,6 +132,31 @@ export default function Step2Form() {
           ></div>
         </button>
         <span className="text-sm font-bold text-gray-400">Yearly</span>
+      </div>
+      <div
+        className={`p-4 flex ${currentStep > 1 ? "justify-between" : "justify-end"}`}
+      >
+        {currentStep > 1 && (
+          <button
+            type="button"
+            onClick={handlePrevStep}
+            className="text-gray-600"
+          >
+            Go Back
+          </button>
+        )}
+        <button
+          onClick={() =>
+            saveFormData({
+              plan: selectedPlan,
+              billing: isYearly ? "yearly" : "monthly",
+            })
+          }
+          type="button"
+          className="py-2 px-4 text-white bg-blue-900 rounded-lg"
+        >
+          Next Step
+        </button>
       </div>
     </div>
   );

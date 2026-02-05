@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 export default function Step1Form({
   currentStep,
   handlePrevStep,
-  handleNextStep,
+  saveFormData,
 }) {
   const schema = z.object({
     name: z.string().min(1, "This field is required"),
@@ -21,7 +21,7 @@ export default function Step1Form({
 
   const onSubmit = (data) => {
     console.log(data);
-    handleNextStep();
+    saveFormData(data);
   };
 
   return (

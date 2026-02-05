@@ -1,7 +1,7 @@
 import Img from "next/image";
 import { z } from "zod";
 import { useState } from "react";
-export default function Step3Form() {
+export default function Step3Form({ isYearly }) {
   const [selectedAddOns, setSelectedAddOns] = useState({
     onlineService: false,
     largerStorage: false,
@@ -27,7 +27,7 @@ export default function Step3Form() {
       <div className="flex flex-col gap-4">
         {/* Add-on Item 1 */}
 
-        <div className="flex items-center justify-between border border-[#483eff] bg-[#f8f9ff] rounded-lg p-4 md:px-6 cursor-pointer hover:border-[#483eff] transition-all">
+        <div className="flex items-center justify-between border border-[#c0c0c5] bg-[#f8f9ff] rounded-lg p-4 md:px-6 cursor-pointer hover:border-[#483eff] transition-all">
           <div className="flex items-center gap-4 md:gap-6">
             {/* Custom Checkbox Appearance */}
             <button
@@ -55,15 +55,28 @@ export default function Step3Form() {
             </div>
           </div>
 
-          <span className="text-[#483eff] text-xs md:text-sm">+$1/mo</span>
+          <span className="text-[#483eff] text-xs md:text-sm">
+            {isYearly ? "+$10/year" : "+$1/month"}
+          </span>
         </div>
 
         {/* Add-on Item 2 */}
         <div className="flex items-center justify-between border border-gray-200 rounded-lg p-4 md:px-6 cursor-pointer hover:border-[#483eff] transition-all">
           <div className="flex items-center gap-4 md:gap-6">
-            <div className="w-5 h-5 border border-gray-200 rounded flex items-center justify-center">
-              {/* Empty div for unchecked state */}
-            </div>
+            <button
+              onClick={() => toggleAddOn("largerStorage")}
+              className={`w-5 h-5 border ${selectedAddOns.largerStorage ? "border-[#483eff] bg-[#483eff]" : "border-gray-200"} rounded flex items-center justify-center`}
+            >
+              {selectedAddOns.largerStorage && (
+                <Img
+                  src="/icon-checkmark.svg"
+                  width={12}
+                  height={12}
+                  alt="check"
+                  className="w-3 h-3 text-white"
+                />
+              )}
+            </button>
             <div>
               <h3 className="font-bold text-[#02295a] text-sm md:text-base">
                 Larger storage
@@ -73,15 +86,28 @@ export default function Step3Form() {
               </p>
             </div>
           </div>
-          <span className="text-[#483eff] text-xs md:text-sm">+$2/mo</span>
+          <span className="text-[#483eff] text-xs md:text-sm">
+            {isYearly ? "+$20/year" : "+$2/month"}
+          </span>
         </div>
 
         {/* Add-on Item 3 */}
         <div className="flex items-center justify-between border border-gray-200 rounded-lg p-4 md:px-6 cursor-pointer hover:border-[#483eff] transition-all">
           <div className="flex items-center gap-4 md:gap-6">
-            <div className="w-5 h-5 border border-gray-200 rounded flex items-center justify-center">
-              {/* Empty div for unchecked state */}
-            </div>
+            <button
+              onClick={() => toggleAddOn("customizableProfile")}
+              className={`w-5 h-5 border border-gray-200 rounded flex items-center justify-center ${selectedAddOns.customizableProfile ? "bg-[#483eff]" : ""}`}
+            >
+              {selectedAddOns.customizableProfile && (
+                <Img
+                  src="/icon-checkmark.svg"
+                  width={12}
+                  height={12}
+                  alt="check"
+                  className="w-3 h-3"
+                />
+              )}
+            </button>
             <div>
               <h3 className="font-bold text-[#02295a] text-sm md:text-base">
                 Customizable profile
@@ -91,7 +117,9 @@ export default function Step3Form() {
               </p>
             </div>
           </div>
-          <span className="text-[#483eff] text-xs md:text-sm">+$2/mo</span>
+          <span className="text-[#483eff] text-xs md:text-sm">
+            {isYearly ? "+$20/year" : "+$2/month"}
+          </span>
         </div>
       </div>
     </div>
