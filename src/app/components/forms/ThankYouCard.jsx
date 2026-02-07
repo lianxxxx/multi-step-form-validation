@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function ThankYouCard() {
   return (
-    <div className="bg-white rounded-lg px-6 py-16 shadow-md md:shadow-none flex flex-col items-center text-center h-full justify-center">
+    <div className="bg-white rounded-lg px-6  py-20 shadow-md md:shadow-none flex flex-col items-center text-center h-full justify-center md:pl-12 md:pr-16 md:py-0">
       {/* Icon Section */}
-      <div className="mb-8">
+      <div className="mb-6">
         <Image
           src="/icon-thank-you.svg"
           alt="Thank You"
@@ -15,11 +15,11 @@ export default function ThankYouCard() {
       </div>
 
       {/* Text Section */}
-      <h1 className="text-2xl md:text-3xl font-bold text-[#02295a] mb-4">
+      <h1 className="text-2xl md:text-3xl font-bold text-blue-950 mb-4">
         Thank you!
       </h1>
 
-      <p className="text-gray-400 leading-relaxed max-w-md">
+      <p className="text-grey-500 leading-relaxed max-w-md">
         Thanks for confirming your subscription! We hope you have fun using our
         platform. If you ever need support, please feel free to email us at
         support@loremgaming.com.

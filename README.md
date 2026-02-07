@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Multi-Step Form - Frontend Mentor Challenge
 
-## Getting Started
+A responsive multi-step form built with Next.js, React Hook Form, Zod validation, and Tailwind CSS.
 
-First, run the development server:
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── components/
+│   │   ├── forms/
+│   │   │   ├── Step1Form.jsx    # Personal info form
+│   │   │   ├── Step2Form.jsx    # Plan selection
+│   │   │   ├── Step3Form.jsx    # Add-ons selection
+│   │   │   ├── Step4Form.jsx    # Summary & confirmation
+│   │   │   └── ThankYouCard.jsx # Success message
+│   │   └── StepIndicator.jsx    # Step progress indicator
+│   ├── globals.css              # Global styles & Tailwind directives
+│   ├── page.js                  # Main page with form logic
+│   └── layout.js
+├── public/
+│   └── (icons and images)
+├── tailwind.config.js
+└── package.json
+```
+
+## 🚀 Features
+
+- **Multi-step form flow** with 4 steps
+- **Form validation** using React Hook Form + Zod
+- **Responsive design** - Mobile-first approach
+- **Plan selection** - Monthly/Yearly billing toggle
+- **Add-ons selection** - Optional service upgrades
+- **Dynamic pricing** - Real-time price calculations
+- **Form persistence** - Data saved across steps
+- **Clean UI** - Tailwind CSS styling
+
+## 🛠️ Technologies Used
+
+- **Next.js 14** (App Router)
+- **React 18**
+- **React Hook Form** - Form state management
+- **Zod** - Schema validation
+- **Tailwind CSS** - Styling
+- **JavaScript (ES6+)**
+
+## 📦 Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/lianxxxx/multi-step-form-validation.git
+```
+
+2. Navigate to project directory
+
+```bash
+cd multi-step-form-validation
+```
+
+3. Install dependencies
+
+```bash
+npm install
+```
+
+4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📝 Form Steps
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Step 1: Personal Info
 
-## Learn More
+- Name (required)
+- Email (required, validated)
+- Phone (required, min 10 characters)
 
-To learn more about Next.js, take a look at the following resources:
+### Step 2: Select Plan
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Choose between Arcade, Advanced, or Pro
+- Toggle Monthly/Yearly billing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Step 3: Add-ons
 
-## Deploy on Vercel
+- Online service
+- Larger storage
+- Customizable profile
+- Each add-on has monthly/yearly pricing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Step 4: Finishing Up
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Summary of selected plan and add-ons
+- Total price calculation
+- Option to change plan (go back to Step 2)
+- Confirm button to submit
+
+### Thank You
+
+- Success message after form submission
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: Default (< 768px)
+- **Desktop**: md breakpoint (≥ 768px)
+
+## 🔧 Key Components
+
+### StepIndicator
+
+Displays current step number with visual indicator
+
+### Step1Form
+
+- Uses React Hook Form with Zod validation
+- Real-time error messages
+- Saves data to parent state on submit
+
+### Step2Form
+
+- Plan selection with visual cards
+- Monthly/Yearly toggle switch
+- Highlights selected plan
+
+### Step3Form
+
+- Checkbox-based add-on selection
+- Dynamic pricing based on billing cycle
+
+### Step4Form
+
+- Summary view with price breakdown
+- Dynamic total calculation
+- Change plan functionality
+
+### ThankYouCard
+
+- Final success message with icon
+
+## 🐛 Known Issues
+
+- Fixed button positioning on mobile may need adjustment for very small screens
+- Form doesn't persist data on page refresh (no localStorage)
+
+## 🚧 Future Improvements
+
+- Add localStorage for form persistence
+- Add animations between steps
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🙏 Credits
+
+Design by [Frontend Mentor](https://www.frontendmentor.io)
+
+---
+
+Built with Next.js, React Hook Form, Zod, and Tailwind CSS

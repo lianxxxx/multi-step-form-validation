@@ -12,6 +12,7 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isYearly, setIsYearly] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Arcade");
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     // Step 1 data
     name: "",
@@ -49,6 +50,7 @@ export default function Home() {
         currentStep={currentStep}
         handlePrevStep={handlePrevStep}
         saveFormData={saveFormData}
+        formData={formData}
       />
     ),
     2: (
@@ -66,15 +68,22 @@ export default function Home() {
       <Step3Form
         currentStep={currentStep}
         handlePrevStep={handlePrevStep}
-        handleNextStep={handleNextStep}
+        saveFormData={saveFormData}
         isYearly={isYearly}
+        selectedAddOns={formData.addOns}
+        setSelectedAddOns={(addOns) =>
+          setFormData((prev) => ({ ...prev, addOns }))
+        }
       />
     ),
     4: (
       <Step4Form
         currentStep={currentStep}
         handlePrevStep={handlePrevStep}
-        handleNextStep={handleNextStep}
+        formData={formData}
+        isYearly={isYearly}
+        setCurrentStep={setCurrentStep}
+        setIsSubmitted={setIsSubmitted}
       />
     ),
   };
@@ -84,17 +93,17 @@ export default function Home() {
       {/* Mobile */}
       <div className="md:hidden">
         <StepIndicator currentStep={currentStep} />
-        <div className="relative px-4 -mt-16 pb-8 z-20">
-          {steps[currentStep]}
+        <div className="relative px-4 -mt-18 z-20 pb-24">
+          {isSubmitted ? <ThankYouCard /> : steps[currentStep]}
         </div>
       </div>
 
       {/* Desktop */}
-      <div className="hidden md:flex min-h-screen items-center justify-center p-4">
-        <div className="flex gap-8 bg-white rounded-2xl p-4">
+      <div className="hidden md:flex min-h-screen items-center justify-center ">
+        <div className="flex gap-8 bg-white rounded-2xl p-4 w-212.5 min-h-137.5 shadow-lg ">
           <StepIndicator currentStep={currentStep} />
-          <div className="flex flex-col justify-between">
-            {steps[currentStep]}
+          <div className="flex flex-col justify-between flex-1">
+            {isSubmitted ? <ThankYouCard /> : steps[currentStep]}
           </div>
         </div>
       </div>
